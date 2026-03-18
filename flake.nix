@@ -19,7 +19,7 @@
         terranix.terranixConfigurations.fixthislater = {
           terraformWrapper.package = pkgs.opentofu;
           terraformWrapper.prefixText = ''
-            TF_VAR_hcloud_api_token="$(cat hcloud_api_token)"
+            TF_VAR_hcloud_api_token="$(cat /run/secrets/hcloud-api-token)"
             export TF_VAR_hcloud_api_token
           '';
           modules = [ ./config.nix ];
