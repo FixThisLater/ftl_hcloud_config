@@ -17,13 +17,21 @@
 
       perSystem = { pkgs, ... }: {
         terranix.terranixConfigurations.fixthislater = {
-          terraformWrapper.package = pkgs.opentofu;
-          terraformWrapper.prefixText = ''
-            TF_VAR_hcloud_api_token="$(cat /run/secrets/hcloud-api-token)"
-            export TF_VAR_hcloud_api_token
-          '';
+          terraformWrapper = {
+            package = pkgs.opentofu;
+            extraRuntimeInputs = [ pkgs.jq ];
+            prefixText = ''
+              TF_VAR_hcloud_api_token="$(cat /run/secrets/hcloud-api-token)"
+              export TF_VAR_hcloud_api_token
+              AWS_ACCESS_KEY_ID="$(cat /run/secrets/hcloud-s3-access-key)"
+              export AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY="$(cat /run/secrets/hcloud-s3-secret-key)"
+              export AWS_SECRET_ACCESS_KEY
+              export AWS_DEFAULT_REGION="us-east-2"
+            '';
+          };
           modules = [ ./config.nix ];
-        };
       };
     };
+  };
 }

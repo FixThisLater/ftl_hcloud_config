@@ -1,6 +1,22 @@
 { lib, ... }:
 {
 
+  terraform.backend.s3 = {
+    bucket = "fixthislater";
+    key    = "terraform.tfstate";
+    endpoints.s3 = "https://hel1.your-objectstorage.com";
+    skip_requesting_account_id = true;
+    skip_credentials_validation = true;
+    skip_metadata_api_check = true;
+    skip_region_validation = true;
+    use_path_style = true;
+  };
+
+  terraform.required_providers.hcloud = {
+    source  = "hetznercloud/hcloud";
+    version = "1.59.0";
+  };
+
   variable.hcloud_api_token.sensitive = "true";
 
   provider.hcloud.token = "\${var.hcloud_api_token}";
