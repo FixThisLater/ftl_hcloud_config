@@ -20,15 +20,17 @@
           terraformWrapper = {
             package = pkgs.opentofu;
             extraRuntimeInputs = [ pkgs.jq ];
-            prefixText = ''
-              TF_VAR_hcloud_api_token="$(cat /run/secrets/hcloud-api-token)"
-              export TF_VAR_hcloud_api_token
-              AWS_ACCESS_KEY_ID="$(cat /run/secrets/hcloud-s3-access-key)"
-              export AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY="$(cat /run/secrets/hcloud-s3-secret-key)"
-              export AWS_SECRET_ACCESS_KEY
-              export AWS_DEFAULT_REGION="us-east-2"
-            '';
+#             # Not needed if envvars are already defined with all these credentials
+#             prefixText = ''
+#               TF_VAR_hcloud_api_token="$(cat /run/secrets/hcloud-api-token)"
+#               AWS_ACCESS_KEY_ID="$(cat /run/secrets/hcloud-s3-access-key)"
+#               AWS_SECRET_ACCESS_KEY="$(cat /run/secrets/hcloud-s3-secret-key)"
+#
+#               export TF_VAR_hcloud_api_token
+#               export AWS_ACCESS_KEY_ID
+#               export AWS_SECRET_ACCESS_KEY
+#               export AWS_DEFAULT_REGION="us-east-2"
+#             '';
           };
           modules = [ ./config.nix ];
       };
