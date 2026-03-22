@@ -1,4 +1,9 @@
-# flake.nix
+# Flake using the Terranix flake-parts module
+#
+# Implicitly defines a "fixthislater" package with runnable attributes
+# for "init", "apply", "plan", and "destroy"
+#
+# Reference: https://terranix.org/terranix-and-flake-modules.html
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -18,8 +23,8 @@
       perSystem = { pkgs, ... }: {
         terranix.terranixConfigurations.fixthislater = {
           terraformWrapper = {
+            # Causes OpenTofu to be used instead of Terraform
             package = pkgs.opentofu;
-            extraRuntimeInputs = [ pkgs.jq ];
             # Assumes these 3 sops-nix secrets are already available and just need
             # to be imported (safely) as envvars in the terranix shell
             prefixText = ''
@@ -33,7 +38,9 @@
               export AWS_DEFAULT_REGION="us-east-2"
             '';
           };
-          modules = [ ./config.nix ];
+          modules = [
+            ./config.nix # Contains all the actual terraform resource definitions
+          ];
       };
     };
   };

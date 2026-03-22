@@ -1,6 +1,15 @@
+# Terraform resource configurations
+
 { lib, ... }:
 {
 
+  terraform.required_providers.hcloud = {
+    source  = "hetznercloud/hcloud";
+    version = "1.59.0";
+  };
+
+  # Save the state file to the HCloud storage bucket
+  # (Created manually and not managed by this stack)
   terraform.backend.s3 = {
     bucket = "fixthislater";
     key    = "terraform.tfstate";
@@ -12,15 +21,11 @@
     use_path_style = true;
   };
 
-  terraform.required_providers.hcloud = {
-    source  = "hetznercloud/hcloud";
-    version = "1.59.0";
-  };
-
+  # Import HCloud token from the TF_VAR_hcloud_api_token envvar
   variable.hcloud_api_token.sensitive = "true";
-
   provider.hcloud.token = "\${var.hcloud_api_token}";
 
+  # Indicate key to be used for root login - will be used only to install NixOS anyway
   resource.hcloud_ssh_key.ftl_init_key = {
     name       = "ftl_init_key";
     public_key = ''
@@ -28,6 +33,7 @@
     '';
   };
 
+  # Define the main server
   resource.hcloud_server.fixthislater = {
     name        = "fixthislater";
     location    = "nbg1";
