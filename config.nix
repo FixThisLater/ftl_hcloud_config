@@ -57,19 +57,18 @@
   resource.hcloud_zone_rrset = {
     fixthislater_A = {
       zone = "\${hcloud_zone.fixthislater.name}";
-      name = "www";
+      name = "@";
       type = "A";
       records = [ { value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
       change_protection = true;
     };
     fixthislater_AAAA = {
       zone = "\${hcloud_zone.fixthislater.name}";
-      name = "www";
+      name = "@";
       type = "AAAA";
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
-
   };
 
   # Reverse DNS - IPv4
