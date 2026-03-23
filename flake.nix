@@ -1,10 +1,13 @@
-# Flake using the Terranix flake-parts module
-#
-# Implicitly defines a "fixthislater" package with runnable attributes
-# for "init", "apply", "plan", and "destroy"
-#
-# Reference: https://terranix.org/terranix-and-flake-modules.html
 {
+
+  description = ''
+    Terranix & NixOS configurations for the Fix This Later resources in the
+    Hetzner Cloud.
+
+    This is a good working example of a Terranix flake that manages a set of
+    HCloud resources
+  '';
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
