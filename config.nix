@@ -33,7 +33,7 @@
     '';
   };
 
-  # Define the main server
+  # The main server
   resource.hcloud_server.fixthislater = {
     name        = "fixthislater";
     location    = "nbg1";
@@ -44,6 +44,46 @@
       ipv6_enabled = true;
     };
     ssh_keys    = [ "\${hcloud_ssh_key.ftl_init_key.id}" ];
+  };
+
+  # Hosted zone for the fixthislater.com domain
+  resource.hcloud_zone.fixthislater = {
+    name = "fixthislater.com";
+    mode = "primary";
+    delete_protection = true;
+  };
+
+  # DNS record sets for the server
+  resource.hcloud_zone_rrset = {
+    fixthislater_A = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "www";
+      type = "A";
+      records = [ { value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
+      change_protection = true;
+    };
+    fixthislater_AAAA = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "www";
+      type = "AAAA";
+      records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
+      change_protection = true;
+    };
+
+  };
+
+  # Reverse DNS - IPv4
+  resource.hcloud_rdns.fixthislater_ipv4 = {
+    server_id = "\${hcloud_server.fixthislater.id}";
+    ip_address = "\${hcloud_server.fixthislater.ipv4_address}";
+    dns_ptr = "fixthislater.com";
+  };
+
+  # Reverse DNS - IPv6
+  resource.hcloud_rdns.fixthislater_ipv6 = {
+    server_id = "\${hcloud_server.fixthislater.id}";
+    ip_address = "\${hcloud_server.fixthislater.ipv6_address}";
+    dns_ptr = "fixthislater.com";
   };
 
 }
