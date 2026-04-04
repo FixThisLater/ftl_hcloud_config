@@ -13,7 +13,6 @@
   terraform.backend.s3 = {
     bucket = "fixthislater.com";
     key = "terraform.tfstate";
-    region = "us-east-2";
   };
 
   # Import HCloud token from the TF_VAR_hcloud_api_token envvar

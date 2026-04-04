@@ -24,7 +24,7 @@
       systems = [ "x86_64-linux" ];
 
       perSystem = { pkgs, ... }: {
-        terranix.terranixConfigurations.fixthislater = {
+        terranix.terranixConfigurations.ftl = {
           terraformWrapper = {
             # Causes OpenTofu to be used instead of Terraform
             package = pkgs.opentofu;
