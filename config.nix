@@ -8,17 +8,12 @@
     version = "1.59.0";
   };
 
-  # Save the state file to the HCloud storage bucket
+  # Save the state file to an S3-compatible storage bucket
   # (Created manually and not managed by this stack)
   terraform.backend.s3 = {
-    bucket = "fixthislater";
-    key    = "terraform.tfstate";
-    endpoints.s3 = "https://hel1.your-objectstorage.com";
-    skip_requesting_account_id = true;
-    skip_credentials_validation = true;
-    skip_metadata_api_check = true;
-    skip_region_validation = true;
-    use_path_style = true;
+    bucket = "fixthislater.com";
+    key = "terraform.tfstate";
+    region = "us-east-2";
   };
 
   # Import HCloud token from the TF_VAR_hcloud_api_token envvar
