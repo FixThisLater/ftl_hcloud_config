@@ -63,6 +63,20 @@
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
+    fixthislater_github_verification = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "_gh-fixthislater-o";
+      type = "TXT";
+      records = [ {value = "\"b1358cd61e\""; } ];
+      change_protection = true;
+    };
+    fixthislater_github_pages_verification = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "_github-pages-challenge-fixthislater";
+      type = "TXT";
+      records = [ {value = "\"7a76612661a0e2751729c439e93347\""; } ];
+      change_protection = true;
+    };
   };
 
   # Reverse DNS - IPv4
