@@ -131,7 +131,7 @@
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "_dmarc";
       type = "TXT";
-      records = [ {value = "\"v=DMARC1; p=none\""; } ];
+      records = [ {value = "\"v=DMARC1; p=quarantine\""; } ];
       change_protection = true;
     };
   };
