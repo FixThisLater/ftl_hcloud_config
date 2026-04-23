@@ -49,6 +49,7 @@
 
   # DNS record sets for the server
   resource.hcloud_zone_rrset = {
+    # Base A record pointing to server IP
     fixthislater_A = {
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "@";
@@ -56,6 +57,7 @@
       records = [ { value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
       change_protection = true;
     };
+    # Base AAAA record pointing to server IP
     fixthislater_AAAA = {
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "@";
@@ -63,6 +65,7 @@
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
+    # TXT record for GitHub domain verification
     fixthislater_github_verification = {
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "_gh-fixthislater-o";
@@ -70,11 +73,28 @@
       records = [ {value = "\"b1358cd61e\""; } ];
       change_protection = true;
     };
+    # TXT record for GitHub Pages verification
     fixthislater_github_pages_verification = {
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "_github-pages-challenge-fixthislater";
       type = "TXT";
       records = [ {value = "\"7a76612661a0e2751729c439e93347\""; } ];
+      change_protection = true;
+    };
+    # A record for mailserver
+    fixthislater_mailserver_A = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "mail.fixthislater.com";
+      type = "A";
+      records = [ {value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
+      change_protection = true;
+    };
+    # AAAA record for mailserver
+    fixthislater_mailserver_AAAA = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "mail.fixthislater.com";
+      type = "AAAA";
+      records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
   };
