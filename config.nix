@@ -65,6 +65,25 @@
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
+    # Base TXT record
+    fixthislater_mailserver_TXT = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "@";
+      type = "TXT";
+      records = [
+        # SPF record for mailserver
+        { value = "\"v=spf1 a:mail.fixthislater.com -all\""; }
+      ];
+      change_protection = true;
+    };
+    # MX record for mailserver
+    fixthislater_mailserver_MX = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "@";
+      type = "MX";
+      records = [ {value = "10 mail.fixthislater.com."; } ];
+      change_protection = true;
+    };
     # TXT record for GitHub domain verification
     fixthislater_github_verification = {
       zone = "\${hcloud_zone.fixthislater.name}";
@@ -84,6 +103,7 @@
     # A record for mailserver
     fixthislater_mailserver_A = {
       zone = "\${hcloud_zone.fixthislater.name}";
+      name = "mail";
       type = "A";
       records = [ {value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
       change_protection = true;
@@ -91,8 +111,27 @@
     # AAAA record for mailserver
     fixthislater_mailserver_AAAA = {
       zone = "\${hcloud_zone.fixthislater.name}";
+      name = "mail";
       type = "AAAA";
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
+      change_protection = true;
+    };
+    # TXT record for mailserver DKIM
+    # Note: TXT record strings have a 255-character limit, but the DKIM protocol
+    # allows for multiple strings in one value and just treats them as one
+    fixthislater_mailserver_DKIM = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "mail._domainkey";
+      type = "TXT";
+      records = [ {value = "\"v=DKIM1; k=rsa; \" \"p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAonfQ/wAu0Srwo0Eoh/Siuk+0f2sqfoRN6GILd+lzSrrENJphhKKAttHYBEx3svBdiFdXjNhxNUBOHa3+Hz33JT+7W5XahFTkbF5hNzrkVZXxlE/CWS0NbFbgrGSO+7yleRAxx11ch3qaKxIpCNflegZeZMsmvQcu8eg42Lpu1CnldeG8S6bUCCdPpEOYxtG0ul+oqHsATWF0/4Jdi\" \"kylGBpL9JWppsOkHnRCfzvw4goHhJtzYD879zrDGJf0MZX+HVZsVfaCljJ9fxyG23t9Xjav+EaJN1iVVkZNoJ2frHHyNbLa2n+pCldruPK2VdnahOpF5szdq1RNO+NNIqIHoQIDAQAB\""; } ];
+      change_protection = true;
+    };
+    # DMARC record for mailserver
+    fixthislater_mailserver_DMARC = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "_dmarc";
+      type = "TXT";
+      records = [ {value = "\"v=DMARC1; p=none\""; } ];
       change_protection = true;
     };
   };
