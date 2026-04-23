@@ -139,7 +139,7 @@
       zone = "\${hcloud_zone.fixthislater.name}";
       name = "default._bimi";
       type = "TXT";
-      records = [ {value = "\"v=BIMI1;l=;a=https://https://fixthislater.com/bimi-svg-tiny-12-ps.svg\""; } ];
+      records = [ {value = "\"v=BIMI1;l=https://fixthislater.com/bimi-svg-tiny-12-ps.svg;\""; } ];
       change_protection = true;
     };
   };
