@@ -72,7 +72,7 @@
       type = "TXT";
       records = [
         # SPF record for mailserver
-        { value = "\"v=spf1 a:mail.fixthislater.com -all\""; }
+        { value = "\"v=spf1 a a:mail.fixthislater.com ~all\""; }
       ];
       change_protection = true;
     };
