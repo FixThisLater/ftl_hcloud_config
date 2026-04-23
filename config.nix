@@ -134,6 +134,14 @@
       records = [ {value = "\"v=DMARC1; p=quarantine\""; } ];
       change_protection = true;
     };
+    # BIMI record for mailserver
+    fixthislater_mailserver_BIMI = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "default._bimi";
+      type = "TXT";
+      records = [ {value = "\"v=BIMI1;l=;a=https://https://fixthislater.com/bimi-svg-tiny-12-ps.svg\""; } ];
+      change_protection = true;
+    };
   };
 
   # Reverse DNS - IPv4
