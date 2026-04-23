@@ -1,6 +1,6 @@
 # Terraform resource configurations
 
-{ lib, ... }:
+{ ... }:
 {
 
   terraform.required_providers.hcloud = {
@@ -100,17 +100,17 @@
   };
 
   # Reverse DNS - IPv4
-  resource.hcloud_rdns.fixthislater_ipv4 = {
-    server_id = "\${hcloud_server.fixthislater.id}";
-    ip_address = "\${hcloud_server.fixthislater.ipv4_address}";
-    dns_ptr = "fixthislater.com";
-  };
-
-  # Reverse DNS - IPv6
-  resource.hcloud_rdns.fixthislater_ipv6 = {
-    server_id = "\${hcloud_server.fixthislater.id}";
-    ip_address = "\${hcloud_server.fixthislater.ipv6_address}";
-    dns_ptr = "fixthislater.com";
+  resource.hcloud_rdns = {
+    fixthislater_ipv4 = {
+      server_id = "\${hcloud_server.fixthislater.id}";
+      ip_address = "\${hcloud_server.fixthislater.ipv4_address}";
+      dns_ptr = "fixthislater.com";
+      };
+    fixthislater_ipv6 = {
+      server_id = "\${hcloud_server.fixthislater.id}";
+      ip_address = "\${hcloud_server.fixthislater.ipv6_address}";
+      dns_ptr = "fixthislater.com";
+    };
   };
 
 }
