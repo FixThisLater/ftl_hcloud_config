@@ -84,7 +84,6 @@
     # A record for mailserver
     fixthislater_mailserver_A = {
       zone = "\${hcloud_zone.fixthislater.name}";
-      name = "mail.fixthislater.com";
       type = "A";
       records = [ {value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
       change_protection = true;
@@ -92,7 +91,6 @@
     # AAAA record for mailserver
     fixthislater_mailserver_AAAA = {
       zone = "\${hcloud_zone.fixthislater.name}";
-      name = "mail.fixthislater.com";
       type = "AAAA";
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
