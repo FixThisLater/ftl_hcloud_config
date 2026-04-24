@@ -149,12 +149,12 @@
     fixthislater_ipv4 = {
       server_id = "\${hcloud_server.fixthislater.id}";
       ip_address = "\${hcloud_server.fixthislater.ipv4_address}";
-      dns_ptr = "fixthislater.com";
+      dns_ptr = "mail.fixthislater.com";
       };
     fixthislater_ipv6 = {
       server_id = "\${hcloud_server.fixthislater.id}";
       ip_address = "\${hcloud_server.fixthislater.ipv6_address}";
-      dns_ptr = "fixthislater.com";
+      dns_ptr = "mail.fixthislater.com";
     };
   };
 
