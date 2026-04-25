@@ -38,6 +38,9 @@
               export TF_VAR_hcloud_api_token
               export AWS_ACCESS_KEY_ID
               export AWS_SECRET_ACCESS_KEY
+              
+              AWS_DEFAULT_REGION=us-east-2
+              export AWS_DEFAULT_REGION
             '';
           };
           modules = [

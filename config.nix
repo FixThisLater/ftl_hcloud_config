@@ -65,6 +65,22 @@
       records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
       change_protection = true;
     };
+    # A record for the auth subdomain
+    fixthislater_auth_A = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "auth";
+      type = "A";
+      records = [ { value = "\${hcloud_server.fixthislater.ipv4_address}"; } ];
+      change_protection = true;
+    };
+    # AAAA record for the auth subdomain
+    fixthislater_auth_AAAA = {
+      zone = "\${hcloud_zone.fixthislater.name}";
+      name = "auth";
+      type = "AAAA";
+      records = [ {value = "\${hcloud_server.fixthislater.ipv6_address}"; } ];
+      change_protection = true;
+    };
     # Base TXT record
     fixthislater_mailserver_TXT = {
       zone = "\${hcloud_zone.fixthislater.name}";
